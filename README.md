@@ -64,11 +64,14 @@ To set up a proxy to Docker Hub:
 #### Docker configuration
 For Docker Desktop (Windows or macOS), open your Docker Preferences, and select 'Docker Engine'.
 
-Add this section:
+Add this sections into the json file `/etc/docker/daemon.json`:
 ```
-  "insecure-registries": [
-    "IP_ADDRESS:8082"
-  ],
+  "insecure-registries": ["IP_ADDRESS:8082"],
+  "registry-mirrors": ["http://IP_ADDRESS:8082"]
+```
+
+```
+  "registry-mirrors": ["https://docker-proxy.domain.net"]
 ```
 
 Apply & Restart
@@ -134,4 +137,18 @@ Once it has been built, you can push it to the registry:
 
 ```
 docker push IP_ADDRESS:8083/myimage:latest
+```
+
+### for composer .json
+update `composer.json` file in your project root directory and add the following lines in the:
+```
+"repositories": [
+	{
+	  "type": "composer",
+	  "url": "https://composer-proxy.youdromin.com/repository/composer-proxy/"
+	},
+	{
+	  "packagist.org": false
+	}
+]
 ```

@@ -17,3 +17,4 @@ services:
       - '${DC_NEXUS_PRIVATE_PORT:-8083}:8083' # private-docker
     volumes:
       - ./data:/nexus-data
+      - ./deploy-plugins:/opt/sonatype/nexus/deploy

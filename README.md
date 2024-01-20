@@ -66,15 +66,22 @@ For Docker Desktop (Windows or macOS), open your Docker Preferences, and select 
 
 Add this sections into the json file `/etc/docker/daemon.json`:
 ```
+{
   "insecure-registries": ["IP_ADDRESS:8082"],
   "registry-mirrors": ["http://IP_ADDRESS:8082"]
+}
 ```
 
 ```
+{
   "registry-mirrors": ["https://docker-proxy.domain.net"]
+}
 ```
 
 Apply & Restart
+```
+sudo systemctl restart docker && sudo systemctl daemon-reload 
+```
 
 #### Pulling Through the Proxy
 You can now pull images via your repository.  If the image you want is not in your local repo, it'll be pulled from docker hub and cached into your repo for the default amount of time (24 hours) before being re-checked.

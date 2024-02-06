@@ -159,3 +159,33 @@ update `composer.json` file in your project root directory and add the following
 	}
 ]
 ```
+### for npm and yarn:
+in nexus side use [This Link](https://anote.dev/nexus-on-npm-yarnproxy-repository/)
+
+for client side use [this link](https://stackoverflow.com/a/72990926)
+```
+npm config --location=project set registry https://registry.npmmirror.com
+npm config --location=global set registry https://registry.npmmirror.com
+or
+npm config --location=project set registry http://your-nexus-ip:8081/repository/npm-proxy/
+
+
+```
+
+if using nginx-proxy-manager :
+```
+# set a proxy domain https://nexus.your-domain.com
+# path to http schema and ip then port 8081
+# add these codes to advanced tab:
+
+rewrite ^(.*)$ /repository/npm-proxy/$1;
+if ($request_uri ~ ^/*$|^/[^/.]+$) {
+	return 404; 
+}
+
+# for yarn use somethins like:
+rewrite ^(.*)$ /repository/yarn-proxy/$1;
+if ($request_uri ~ ^/*$|^/[^/.]+$) {
+	return 404; 
+}
+```

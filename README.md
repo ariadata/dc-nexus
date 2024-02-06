@@ -182,10 +182,4 @@ rewrite ^(.*)$ /repository/npm-proxy/$1;
 if ($request_uri ~ ^/*$|^/[^/.]+$) {
 	return 404; 
 }
-
-# for yarn use somethins like:
-rewrite ^(.*)$ /repository/yarn-proxy/$1;
-if ($request_uri ~ ^/*$|^/[^/.]+$) {
-	return 404; 
-}
 ```

@@ -2,7 +2,8 @@ version: "3.8"
 
 services:
   nexus:
-    image: 'sonatype/nexus3'
+    # image: 'sonatype/nexus3'
+    image: 'verystar/nexus-repository-composer'
     container_name: ${COMPOSE_PROJECT_NAME}_nexus
     restart: unless-stopped
     extra_hosts:
@@ -17,4 +18,4 @@ services:
       - '${DC_NEXUS_PRIVATE_PORT:-8083}:8083' # private-docker
     volumes:
       - ./data:/nexus-data
-      - ./deploy-plugins:/opt/sonatype/nexus/deploy
+      #- ./deploy-plugins:/opt/sonatype/nexus/deploy

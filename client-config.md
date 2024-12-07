@@ -1,7 +1,6 @@
 # Repository Client Configurations
 
 ## Table of Contents
-- [Backup Commands](#backup-commands)
 - [Debian 11 (Bullseye)](#debian-11-bullseye)
 - [Debian 12 (Bookworm)](#debian-12-bookworm)
 - [Ubuntu 20.04 (Focal)](#ubuntu-2004-focal)
@@ -9,40 +8,25 @@
 - [Ubuntu 24.04 (Noble)](#ubuntu-2404-noble)
 - [Rocky Linux 8](#rocky-linux-8)
 
-## Backup Commands
-
-### For Debian/Ubuntu Systems
-```bash
-# Create backup directory
-sudo mkdir -p /etc/apt/sources.list.backup
-
-# Backup sources.list with timestamp
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup/sources.list.$(date +%Y%m%d_%H%M%S)
-
-# Backup all repository configurations
-sudo tar czf /etc/apt/sources.list.backup/sources_backup_$(date +%Y%m%d_%H%M%S).tar.gz /etc/apt/sources.list /etc/apt/sources.list.d/
-
-# Optional: Create a restore point
-sudo cp /etc/apt/sources.list.backup/sources.list.$(date +%Y%m%d_%H%M%S) /etc/apt/sources.list.restore
-```
-
-### For Rocky Linux
-```bash
-# Create backup directory
-sudo mkdir -p /etc/yum.repos.d/backup
-
-# Backup all repo files with timestamp
-sudo tar czf /etc/yum.repos.d/backup/repos_backup_$(date +%Y%m%d_%H%M%S).tar.gz /etc/yum.repos.d/*.repo
-
-# Backup specific repo file
-sudo cp /etc/yum.repos.d/rocky-nexus.repo /etc/yum.repos.d/backup/rocky-nexus.repo.$(date +%Y%m%d_%H%M%S)
-```
-
 <details>
 <summary><h2>Debian 11 (Bullseye)</h2></summary>
 
-### sources.list Configuration
+### Backup Current Configuration
+```bash
+# Create backup directory if it doesn't exist
+sudo mkdir -p /etc/apt/sources.list.backup
+
+# Backup current sources.list with timestamp
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup/sources.list.$(date +%Y%m%d_%H%M%S)
 ```
+
+### sources.list Configuration
+```bash
+# Edit the sources.list file
+sudo nano /etc/apt/sources.list
+
+# Add the following content:
+
 # Main
 deb https://nexus.arzinja.dev/repository/debian-bullseye-main/ bullseye main
 deb-src https://nexus.arzinja.dev/repository/debian-bullseye-main/ bullseye main
@@ -64,31 +48,66 @@ deb-src https://nexus.arzinja.dev/repository/debian-bullseye-backports/ bullseye
 <details>
 <summary><h2>Debian 12 (Bookworm)</h2></summary>
 
-### sources.list Configuration
+### Backup Current Configuration
+```bash
+# Create backup directory if it doesn't exist
+sudo mkdir -p /etc/apt/sources.list.d/backup
+
+# Backup current debian.sources with timestamp
+sudo cp /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/backup/debian.sources.$(date +%Y%m%d_%H%M%S)
 ```
-# Main
-deb https://nexus.arzinja.dev/repository/debian-bookworm-main/ bookworm main
-deb-src https://nexus.arzinja.dev/repository/debian-bookworm-main/ bookworm main
 
-# Security
-deb https://nexus.arzinja.dev/repository/debian-bookworm-security/ bookworm-security main
-deb-src https://nexus.arzinja.dev/repository/debian-bookworm-security/ bookworm-security main
+### Repository Configuration
+```bash
+# Edit the debian.sources file
+sudo nano /etc/apt/sources.list.d/debian.sources
 
-# Updates
-deb https://nexus.arzinja.dev/repository/debian-bookworm-updates/ bookworm-updates main
-deb-src https://nexus.arzinja.dev/repository/debian-bookworm-updates/ bookworm-updates main
+# Add the following content:
 
-# Backports
-deb https://nexus.arzinja.dev/repository/debian-bookworm-backports/ bookworm-backports main
-deb-src https://nexus.arzinja.dev/repository/debian-bookworm-backports/ bookworm-backports main
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/debian-bookworm-main/
+Suites: bookworm
+Components: main
+
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/debian-bookworm-security/
+Suites: bookworm-security
+Components: main
+
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/debian-bookworm-updates/
+Suites: bookworm-updates
+Components: main
+
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/debian-bookworm-backports/
+Suites: bookworm-backports
+Components: main
 ```
+
+### Note
+Debian 12 uses the new deb822 format in `/etc/apt/sources.list.d/debian.sources` instead of the traditional sources.list format.
 </details>
 
 <details>
 <summary><h2>Ubuntu 20.04 (Focal)</h2></summary>
 
-### sources.list Configuration
+### Backup Current Configuration
+```bash
+# Create backup directory if it doesn't exist
+sudo mkdir -p /etc/apt/sources.list.backup
+
+# Backup current sources.list with timestamp
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup/sources.list.$(date +%Y%m%d_%H%M%S)
 ```
+
+### sources.list Configuration
+```bash
+# Edit the sources.list file
+sudo nano /etc/apt/sources.list
+
+# Add the following content:
+
 # Main
 deb https://nexus.arzinja.dev/repository/ubuntu-focal-main/ focal main restricted universe multiverse
 deb-src https://nexus.arzinja.dev/repository/ubuntu-focal-main/ focal main restricted universe multiverse
@@ -110,8 +129,22 @@ deb-src https://nexus.arzinja.dev/repository/ubuntu-focal-backports/ focal-backp
 <details>
 <summary><h2>Ubuntu 22.04 (Jammy)</h2></summary>
 
-### sources.list Configuration
+### Backup Current Configuration
+```bash
+# Create backup directory if it doesn't exist
+sudo mkdir -p /etc/apt/sources.list.backup
+
+# Backup current sources.list with timestamp
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup/sources.list.$(date +%Y%m%d_%H%M%S)
 ```
+
+### sources.list Configuration
+```bash
+# Edit the sources.list file
+sudo nano /etc/apt/sources.list
+
+# Add the following content:
+
 # Main
 deb https://nexus.arzinja.dev/repository/ubuntu-jammy-main/ jammy main restricted universe multiverse
 deb-src https://nexus.arzinja.dev/repository/ubuntu-jammy-main/ jammy main restricted universe multiverse
@@ -133,8 +166,22 @@ deb-src https://nexus.arzinja.dev/repository/ubuntu-jammy-backports/ jammy-backp
 <details>
 <summary><h2>Ubuntu 24.04 (Noble)</h2></summary>
 
-### sources.list Configuration
+### Backup Current Configuration
+```bash
+# Create backup directory if it doesn't exist
+sudo mkdir -p /etc/apt/sources.list.backup
+
+# Backup current sources.list with timestamp
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup/sources.list.$(date +%Y%m%d_%H%M%S)
 ```
+
+### sources.list Configuration
+```bash
+# Edit the sources.list file
+sudo nano /etc/apt/sources.list
+
+# Add the following content:
+
 # Main
 deb https://nexus.arzinja.dev/repository/ubuntu-noble-main/ noble main restricted universe multiverse
 deb-src https://nexus.arzinja.dev/repository/ubuntu-noble-main/ noble main restricted universe multiverse
@@ -156,8 +203,22 @@ deb-src https://nexus.arzinja.dev/repository/ubuntu-noble-backports/ noble-backp
 <details>
 <summary><h2>Rocky Linux 8</h2></summary>
 
-### Repository Configuration (/etc/yum.repos.d/rocky-nexus.repo)
+### Backup Current Configuration
+```bash
+# Create backup directory if it doesn't exist
+sudo mkdir -p /etc/yum.repos.d/backup
+
+# Backup all repo files with timestamp
+sudo tar czf /etc/yum.repos.d/backup/repos_backup_$(date +%Y%m%d_%H%M%S).tar.gz /etc/yum.repos.d/*.repo
 ```
+
+### Repository Configuration
+```bash
+# Create and edit the rocky-nexus.repo file
+sudo nano /etc/yum.repos.d/rocky-nexus.repo
+
+# Add the following content:
+
 [rocky-baseos]
 name=Rocky Linux $releasever - BaseOS
 baseurl=https://nexus.arzinja.dev/repository/rocky-8-baseos/

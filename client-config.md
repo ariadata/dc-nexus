@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Debian 11 (Bullseye)](#debian-11-bullseye)
 - [Debian 12 (Bookworm)](#debian-12-bookworm)
+- [Debian 13 (Trixie)](#debian-13-trixie)
 - [Ubuntu 20.04 (Focal)](#ubuntu-2004-focal)
 - [Ubuntu 22.04 (Jammy)](#ubuntu-2204-jammy)
 - [Ubuntu 24.04 (Noble)](#ubuntu-2404-noble)
@@ -87,6 +88,50 @@ Components: main
 
 ### Note
 Debian 12 uses the new deb822 format in `/etc/apt/sources.list.d/debian.sources` instead of the traditional sources.list format.
+</details>
+
+<details>
+<summary><h2>Debian 13 (Trixie)</h2></summary>
+
+### Backup Current Configuration
+```bash
+# Create backup directory if it doesn't exist
+sudo mkdir -p /etc/apt/sources.list.d/backup
+
+# Backup current debian.sources with timestamp
+sudo cp /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/backup/debian.sources.$(date +%Y%m%d_%H%M%S)
+```
+
+### Repository Configuration
+```bash
+# Edit the debian.sources file
+sudo nano /etc/apt/sources.list.d/debian.sources
+
+# Add the following content:
+
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/debian-trixie-main/
+Suites: trixie
+Components: main
+
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/debian-trixie-security/
+Suites: trixie-security
+Components: main
+
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/debian-trixie-updates/
+Suites: trixie-updates
+Components: main
+
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/debian-trixie-backports/
+Suites: trixie-backports
+Components: main
+```
+
+### Note
+Debian 13 uses the new deb822 format in `/etc/apt/sources.list.d/debian.sources` instead of the traditional sources.list format.
 </details>
 
 <details>

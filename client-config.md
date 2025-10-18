@@ -214,34 +214,38 @@ deb-src https://nexus.arzinja.dev/repository/ubuntu-jammy-backports/ jammy-backp
 ### Backup Current Configuration
 ```bash
 # Create backup directory if it doesn't exist
-sudo mkdir -p /etc/apt/sources.list.backup
+sudo mkdir -p /etc/apt/sources.list.d/backup
 
-# Backup current sources.list with timestamp
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup/sources.list.$(date +%Y%m%d_%H%M%S)
+# Backup current ubuntu.sources with timestamp
+sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/backup/ubuntu.sources.$(date +%Y%m%d_%H%M%S)
 ```
 
 ### sources.list Configuration
 ```bash
-# Edit the sources.list file
-sudo nano /etc/apt/sources.list
+# Edit the ubuntu.sources file
+sudo nano /etc/apt/sources.list.d/ubuntu.sources
 
 # Add the following content:
 
-# Main
-deb https://nexus.arzinja.dev/repository/ubuntu-noble-main/ noble main restricted universe multiverse
-deb-src https://nexus.arzinja.dev/repository/ubuntu-noble-main/ noble main restricted universe multiverse
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/ubuntu-noble-main/
+Suites: noble
+Components: main restricted universe multiverse
 
-# Security
-deb https://nexus.arzinja.dev/repository/ubuntu-noble-security/ noble-security main restricted universe multiverse
-deb-src https://nexus.arzinja.dev/repository/ubuntu-noble-security/ noble-security main restricted universe multiverse
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/ubuntu-noble-security/
+Suites: noble-security
+Components: main restricted universe multiverse
 
-# Updates
-deb https://nexus.arzinja.dev/repository/ubuntu-noble-updates/ noble-updates main restricted universe multiverse
-deb-src https://nexus.arzinja.dev/repository/ubuntu-noble-updates/ noble-updates main restricted universe multiverse
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/ubuntu-noble-updates/
+Suites: noble-updates
+Components: main restricted universe multiverse
 
-# Backports
-deb https://nexus.arzinja.dev/repository/ubuntu-noble-backports/ noble-backports main restricted universe multiverse
-deb-src https://nexus.arzinja.dev/repository/ubuntu-noble-backports/ noble-backports main restricted universe multiverse
+Types: deb deb-src
+URIs: https://nexus.arzinja.dev/repository/ubuntu-noble-backports/
+Suites: noble-backports
+Components: main restricted universe multiverse
 ```
 </details>
 

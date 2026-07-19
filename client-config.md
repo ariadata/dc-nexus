@@ -40,9 +40,6 @@ deb-src https://nexus.arzinja.dev/repository/debian-bullseye-security/ bullseye-
 deb https://nexus.arzinja.dev/repository/debian-bullseye-updates/ bullseye-updates main
 deb-src https://nexus.arzinja.dev/repository/debian-bullseye-updates/ bullseye-updates main
 
-# Backports
-deb https://nexus.arzinja.dev/repository/debian-bullseye-backports/ bullseye-backports main
-deb-src https://nexus.arzinja.dev/repository/debian-bullseye-backports/ bullseye-backports main
 ```
 </details>
 
